@@ -1,0 +1,33 @@
+table {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  max-height: 350px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table tr, table td{
+  border : 1px solid black;
+}
+
+.gray {
+  background-color: rgb(127, 127, 127, 0.5);
+}
+
+div#searchbtnbox {
+  display: inline-block;
+  margin: 30px 200px 30px 200px; 
+}
+div#btnbox {
+  display: inline-block;
+  margin: 30px 200px 30px 50px;
+  float: right;
+}
+
+button {
+  width : 100px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin: 5px;
+}
