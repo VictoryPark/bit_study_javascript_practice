@@ -52,15 +52,15 @@
       <!-- 파일업로드 할 수 있는 라이브러리 다운로드 후..
       그 라이브러리를 실제 사용하는 spring jar 클래스를 빈객체로 만든다..
       id는 고정으로 사용하여야 한다.. -->
-      <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
       	<property name="maxUploadSize" value="10485760"/>
-      									<!-- value값은 파일 사이즈 1024*1024*10 메가 -->
-      </bean>
+      									value값은 파일 사이즈 1024*1024*10 메가
+      </bean> -->
       
       <!-- 컨트롤러에 메소드 거치지 않고 페이지 이동 
 			url path로 올경우에는...prefix + viewname + suffix 의 jsp로 이동해라!-->
-     <mvc:view-controller path="/intern/search.do"
-      						view-name="search"/> 
+    <!--  <mvc:view-controller path="/intern/search.do"
+      						view-name="search"/>  -->
       						
     <!--  <mvc:view-controller path="/start.cf"
       						view-name="common/start"/>  -->

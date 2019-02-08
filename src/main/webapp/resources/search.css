@@ -2,9 +2,14 @@ table {
   text-align: center;
   width: 80%;
   margin: auto;
-  max-height: 350px;
   border: 1px solid black;
   border-collapse: collapse;
+}
+table#search {
+	min-height: 200px;
+}
+table#result tr {
+	height : 50px;
 }
 table tr, table td{
   border : 1px solid black;

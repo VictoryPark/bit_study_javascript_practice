@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.araniii.intern.repository.mapper.BoardMapper">
+ 	<resultMap type="Staff" id="staffMap">
+ 		<result column="staff_no" property="staffNo"/>
+ 		<result column="staff_name" property="staffName"/>
+ 		<result column="jumin_no" property="juminNo"/>
+ 		<result column="school_code" property="schoolCode"/>
+ 		<result column="religion_code" property="religionCode"/>
+ 		<result column="graduate_day" property="graduateDay"/>
+ 		<result column="religion_name" property="religionName"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="Religion" id="religionMap">
+ 		<result column="religion_code" property="religionCode"/>
+ 		<result column="religion_name" property="religionName"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="School" id="schoolMap">
+ 		<result column="school_code" property="schoolCode"/>
+ 		<result column="school_name" property="schoolName"/>
+ 	</resultMap>
+ 	
+ 	<select id="selectReligionList" resultMap="religionMap">
+ 		select * from code_religion
+ 		order by religion_code
+ 	</select>
+ 	
+ 	
+ 	<select id="selectAllStaff" resultMap="staffMap">
+ 		select s.*, r.religion_name religion_name
+		  from staff s
+		inner join code_religion r
+		    on s.religion_code = r.religion_code
+		order by staff_no
+ 	</select> 
+ 	
+ 	
+	
+</mapper>
