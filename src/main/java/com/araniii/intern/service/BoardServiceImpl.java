@@ -1,10 +1,13 @@
 package com.araniii.intern.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.araniii.intern.common.PageResult;
 import com.araniii.intern.repository.domain.Religion;
 import com.araniii.intern.repository.domain.Staff;
 import com.araniii.intern.repository.mapper.BoardMapper;
@@ -21,8 +24,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Staff> searchAll() {
-		List<Staff> list = mapper.selectAllStaff();
+	public Map<String, Object> searchAll(int pageNo) {
+		Map<String, Object> map = new HashMap<>();
+		List<Staff> list = mapper.selectAllStaff((pageNo-1)*5);
 		
 		for(Staff s : list) {
 			if(s.getJuminNo().charAt(7) == '1') {
@@ -31,7 +35,12 @@ public class BoardServiceImpl implements BoardService{
 				s.setGender("여");
 			}
 		}
-		return list;
-	}
+		
+		map.put("list", list);
+		map.put("pageResult", new PageResult(pageNo, mapper.selectCntAllStaff()));
+		return map;
+	} //searchAll
+	
+	
 
-}
+} //end class

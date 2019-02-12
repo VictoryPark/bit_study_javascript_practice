@@ -1,11 +1,13 @@
 package com.araniii.intern.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.araniii.intern.repository.domain.Staff;
@@ -25,8 +27,9 @@ public class BoardController {
 	
 	@RequestMapping("/searchAll.do")
 	@ResponseBody
-	public List<Staff> searchAll() {
-		return service.searchAll();
+	public Map<String, Object> searchAll(
+				@RequestParam(value="pageno", defaultValue = "1")int pageNo) {
+		return service.searchAll(pageNo);
 	}
 	
 	

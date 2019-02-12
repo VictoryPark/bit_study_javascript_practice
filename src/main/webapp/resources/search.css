@@ -36,3 +36,32 @@ button {
   border-radius: 5px;
   margin: 5px;
 }
+
+#paging {
+  width: 50%;
+  margin: 30px auto;
+  text-align: center;
+}
+div.pagination a{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-decoration: none;
+  color : black;
+}
+div.pagination a.focus,
+div.pagination a.active {
+  text-decoration: none;
+}
+
+a#now {
+  background-color: rgba(34, 32, 117);
+  color : white;
+  pointer-events: none;
+  cursor: default;
+}
+div.pagination a.disabled {
+  pointer-events: none;
+  cursor: default;
+  color : rgb(128, 128, 128, 0.5);
+}

@@ -8,5 +8,6 @@ import com.araniii.intern.repository.domain.Staff;
 public interface BoardMapper {
 
 	public List<Religion> selectReligionList();
-	public List<Staff> selectAllStaff();
+	public List<Staff> selectAllStaff(int begin);
+	public int selectCntAllStaff();
 }

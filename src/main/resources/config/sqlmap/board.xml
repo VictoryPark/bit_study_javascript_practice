@@ -28,13 +28,18 @@
  	</select>
  	
  	
- 	<select id="selectAllStaff" resultMap="staffMap">
+ 	<select id="selectAllStaff" parameterType="int" resultMap="staffMap">
  		select s.*, r.religion_name religion_name
 		  from staff s
-		inner join code_religion r
+		 inner join code_religion r
 		    on s.religion_code = r.religion_code
 		order by staff_no
+		 limit #{begin}, 5
  	</select> 
+ 	
+ 	<select id="selectCntAllStaff" resultType="int">
+ 		select count(*) from staff
+ 	</select>
  	
  	
 	
