@@ -3,8 +3,9 @@ package com.araniii.intern.repository.domain;
 import lombok.Data;
 
 @Data
-public class School {
+public class Skill {
 
-	private int schoolCode;
-	private String schoolName;
+	private int skillCode;
+	private String skillName;
+	
 }

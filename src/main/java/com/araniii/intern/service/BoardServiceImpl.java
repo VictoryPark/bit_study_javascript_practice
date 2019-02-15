@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.araniii.intern.common.PageResult;
-import com.araniii.intern.repository.domain.Religion;
+import com.araniii.intern.repository.domain.SearchResult;
 import com.araniii.intern.repository.domain.Staff;
 import com.araniii.intern.repository.mapper.BoardMapper;
 
@@ -19,8 +19,12 @@ public class BoardServiceImpl implements BoardService{
 	private BoardMapper mapper;
 	
 	@Override
-	public List<Religion> getReligionList() {
-		return mapper.selectReligionList();
+	public Map<String, Object> getReligionList() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("religionList", mapper.selectReligionList());
+		map.put("schoolList", mapper.selectSchoolList());
+		map.put("skillList", mapper.selectSkillList());
+		return map;
 	}
 
 	@Override
@@ -40,6 +44,24 @@ public class BoardServiceImpl implements BoardService{
 		map.put("pageResult", new PageResult(pageNo, mapper.selectCntAllStaff()));
 		return map;
 	} //searchAll
+
+	@Override
+	public Map<String, Object> searchByKey(SearchResult result) {
+		Map<String, Object> map = new HashMap<>();
+		
+		result.setStartDate(result.getStartYear()+"-"+
+							result.getStartMonth()+"-"+
+							result.getStartDay());
+		
+		result.setEndDate(result.getEndYear()+"-"+
+						  result.getEndMonth()+"-"+
+						  result.getEndDay());
+		map.put("searchResult", mapper.selectStaffBySearch(result));
+		map.put("pageResult", new PageResult(result.getPageNo(), mapper.selectCntStaffBySearch(result)));
+		
+		
+		return null;
+	}
 	
 	
 

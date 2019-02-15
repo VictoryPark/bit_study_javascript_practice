@@ -22,9 +22,24 @@
  		<result column="school_name" property="schoolName"/>
  	</resultMap>
  	
+ 	<resultMap type="Skill" id="skillMap">
+ 		<result column="skill_code" property="skillCode"/>
+ 		<result column="skill_name" property="skillName"/>
+ 	</resultMap>
+ 	
  	<select id="selectReligionList" resultMap="religionMap">
  		select * from code_religion
  		order by religion_code
+ 	</select>
+ 	
+ 	<select id="selectSchoolList" resultMap="schoolMap">
+ 		select * from code_school
+ 		order by school_code
+ 	</select>
+ 	
+ 	<select id="selectSkillList" resultMap="skillMap">
+ 		select * from code_skill
+ 		order by skill_code
  	</select>
  	
  	
@@ -41,6 +56,108 @@
  		select count(*) from staff
  	</select>
  	
+ 	<select id="selectCntStaffBySearch" parameterType="SearchResult" resultMap="staffMap">
+ 		select count(*)
+ 		  from staff s
+		 inner join code_religion r
+		    on s.religion_code = r.religion_code
+		 inner join staff_skill k
+			on k.staff_no = s.staff_no	  	
+ 		 <where>
+ 		 	<if test="staffName!=''">
+	 			staff_name like concat('%',#{staffName},'%')
+ 		 	</if>
+ 		 	<if test="gender!=null">
+ 		 		and substr(s.jumin_no, 8,1) in <foreach item="ge" collection="gender"
+ 		 												open="(" separator="," close=")">
+ 		 											#{ge}
+ 		 										</foreach> 
+ 		 	</if>
+ 		 	<if test="religion!=0">
+ 		 		religion_code = #{religion}
+ 		 	</if>
+ 		 	<if test="skill!=null">
+ 		 		and k.skill_code in <foreach item="sk" collection="skill"
+ 		 									open="(" separator="," close=")">
+ 		 										#{sk}		
+ 		 							</foreach>
+ 		 	</if>
+ 		 	<if test="school!=null">
+ 		 		and s.school_code in <foreach item="sc" collection="school"
+ 		 									open="(" separator="," close=")">
+ 		 										#{sc}
+ 		 							</foreach> 		 	
+ 		 	</if>
+ 		 	<choose>
+ 		 	<when test="endDate==null">
+ 		 		<if test="startDate!=null">
+ 		 			and s.graduate_day > #{startDate}
+ 		 		</if>
+ 		 	</when>
+ 		 	<when test="endDate!=null">
+ 		 		<if test="startDate==null">
+ 		 			and s.gradudate_day <![CDATA[<]]> #{endDate}
+ 		 		</if>
+ 		 		<if test="startDate!=null">
+ 		 			and s.gradudate_day between #{startDate} and #{endDate}
+ 		 		</if>
+ 		 	</when>
+ 		 	</choose>
+ 		 </where>
+ 	</select>
+ 	
+ 	<select id="selectStaffBySearch" parameterType="SearchResult" resultMap="staffMap">
+ 		select s.*, r.religion_name religion_name
+ 		  from staff s
+		 inner join code_religion r
+		    on s.religion_code = r.religion_code
+		 inner join staff_skill k
+			on k.staff_no = s.staff_no	  	
+ 		 <where>
+ 		 	<if test="staffName!=''">
+	 			staff_name like concat('%',#{staffName},'%')
+ 		 	</if>
+ 		 	<if test="gender!=null">
+ 		 		and substr(s.jumin_no, 8,1) in <foreach item="ge" collection="gender"
+ 		 												open="(" separator="," close=")">
+ 		 											#{ge}
+ 		 										</foreach> 
+ 		 	</if>
+ 		 	<if test="religion!=0">
+ 		 		religion_code = #{religion}
+ 		 	</if>
+ 		 	<if test="skill!=null">
+ 		 		and k.skill_code in <foreach item="sk" collection="skill"
+ 		 									open="(" separator="," close=")">
+ 		 										#{sk}		
+ 		 							</foreach>
+ 		 	</if>
+ 		 	<if test="school!=null">
+ 		 		and s.school_code in <foreach item="sc" collection="school"
+ 		 									open="(" separator="," close=")">
+ 		 										#{sc}
+ 		 							</foreach> 		 	
+ 		 	</if>
+ 		 	<choose>
+ 		 	<when test="endDate==null">
+ 		 		<if test="startDate!=null">
+ 		 			and s.graduate_day > #{startDate}
+ 		 		</if>
+ 		 	</when>
+ 		 	<when test="endDate!=null">
+ 		 		<if test="startDate==null">
+ 		 			and s.gradudate_day <![CDATA[<]]> #{endDate}
+ 		 		</if>
+ 		 		<if test="startDate!=null">
+ 		 			and s.gradudate_day between #{startDate} and #{endDate}
+ 		 		</if>
+ 		 	</when>
+ 		 	</choose>
+ 		 </where>
+ 		 order by staff_no
+ 		 limit #{begin}, 5
+ 		 
+ 	</select>
  	
 	
 </mapper>
