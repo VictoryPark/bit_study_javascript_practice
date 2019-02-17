@@ -56,7 +56,7 @@
  		select count(*) from staff
  	</select>
  	
- 	<select id="selectCntStaffBySearch" parameterType="SearchResult" resultMap="staffMap">
+ 	<select id="selectCntStaffBySearch" parameterType="SearchResult" resultType="int">
  		select count(*)
  		  from staff s
 		 inner join code_religion r
@@ -96,10 +96,10 @@
  		 	</when>
  		 	<when test="endDate!=null">
  		 		<if test="startDate==null">
- 		 			and s.gradudate_day <![CDATA[<]]> #{endDate}
+ 		 			and s.graduate_day <![CDATA[<]]> #{endDate}
  		 		</if>
  		 		<if test="startDate!=null">
- 		 			and s.gradudate_day between #{startDate} and #{endDate}
+ 		 			and s.graduate_day between #{startDate} and #{endDate}
  		 		</if>
  		 	</when>
  		 	</choose>
@@ -146,10 +146,10 @@
  		 	</when>
  		 	<when test="endDate!=null">
  		 		<if test="startDate==null">
- 		 			and s.gradudate_day <![CDATA[<]]> #{endDate}
+ 		 			and s.graduate_day <![CDATA[<]]> #{endDate}
  		 		</if>
  		 		<if test="startDate!=null">
- 		 			and s.gradudate_day between #{startDate} and #{endDate}
+ 		 			and s.graduate_day between #{startDate} and #{endDate}
  		 		</if>
  		 	</when>
  		 	</choose>

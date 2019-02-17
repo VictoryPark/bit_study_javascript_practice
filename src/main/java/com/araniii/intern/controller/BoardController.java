@@ -36,6 +36,7 @@ public class BoardController {
 	@PostMapping("/searchbykey.do")
 	@ResponseBody
 	public Map<String, Object> searchByKey(@RequestBody SearchResult result) {
+		System.out.println(result);
 		return service.searchByKey(result);
 	}
 	

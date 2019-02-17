@@ -56,11 +56,11 @@ public class BoardServiceImpl implements BoardService{
 		result.setEndDate(result.getEndYear()+"-"+
 						  result.getEndMonth()+"-"+
 						  result.getEndDay());
+		System.out.println(result);
 		map.put("searchResult", mapper.selectStaffBySearch(result));
 		map.put("pageResult", new PageResult(result.getPageNo(), mapper.selectCntStaffBySearch(result)));
 		
-		
-		return null;
+		return map;
 	}
 	
 	
