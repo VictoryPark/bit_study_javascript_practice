@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class SearchResult {
 
-	private String staffName;
+	private String name;
 	private List<Integer> gender;
 	private int religion;
 //	private int schoolCode;

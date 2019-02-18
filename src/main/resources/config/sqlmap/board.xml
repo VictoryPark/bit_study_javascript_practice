@@ -62,10 +62,10 @@
 		 inner join code_religion r
 		    on s.religion_code = r.religion_code
 		 inner join staff_skill k
-			on k.staff_no = s.staff_no	  	
+			on k.staff_no = s.staff_no	  	 
  		 <where>
- 		 	<if test="staffName!=''">
-	 			staff_name like concat('%',#{staffName},'%')
+ 		 	<if test="name!=''">
+	 			and s.staff_name like concat('%',#{name},'%')
  		 	</if>
  		 	<if test="gender!=null">
  		 		and substr(s.jumin_no, 8,1) in <foreach item="ge" collection="gender"
@@ -74,7 +74,7 @@
  		 										</foreach> 
  		 	</if>
  		 	<if test="religion!=0">
- 		 		religion_code = #{religion}
+ 		 		s.religion_code = #{religion}
  		 	</if>
  		 	<if test="skill!=null">
  		 		and k.skill_code in <foreach item="sk" collection="skill"
@@ -109,14 +109,14 @@
  	<select id="selectStaffBySearch" parameterType="SearchResult" resultMap="staffMap">
  		select s.*, r.religion_name religion_name
  		  from staff s
-		 inner join code_religion r
+		inner join code_religion r
 		    on s.religion_code = r.religion_code
 		 inner join staff_skill k
-			on k.staff_no = s.staff_no	  	
- 		 <where>
- 		 	<if test="staffName!=''">
-	 			staff_name like concat('%',#{staffName},'%')
- 		 	</if>
+			on k.staff_no = s.staff_no	  --> 	
+ 			<where>
+ 			<if test="name!=''">
+	 			and s.staff_name like CONCAT('%',#{name},'%')
+ 			</if>
  		 	<if test="gender!=null">
  		 		and substr(s.jumin_no, 8,1) in <foreach item="ge" collection="gender"
  		 												open="(" separator="," close=")">
@@ -124,7 +124,7 @@
  		 										</foreach> 
  		 	</if>
  		 	<if test="religion!=0">
- 		 		religion_code = #{religion}
+ 		 		s.religion_code = #{religion}
  		 	</if>
  		 	<if test="skill!=null">
  		 		and k.skill_code in <foreach item="sk" collection="skill"
@@ -154,7 +154,7 @@
  		 	</when>
  		 	</choose>
  		 </where>
- 		 order by staff_no
+ 		 order by s.staff_no
  		 limit #{begin}, 5
  		 
  	</select>

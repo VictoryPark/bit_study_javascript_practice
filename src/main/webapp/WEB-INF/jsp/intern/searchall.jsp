@@ -31,6 +31,7 @@ document.querySelector("button#searchAll")
 			+'<tr class="gray">'
 			+'<td>번호</td><td>이름</td><td>성별</td><td>종교</td>'
 			+'<td>졸업일</td><td></td></tr>'
+		console.log(map.list)
 		for(let staff of map.list) {
 			html += '<tr>'
 			html += '<td>'+staff.staffNo+'</td>'
@@ -42,7 +43,7 @@ document.querySelector("button#searchAll")
 		} //for
 		
 		html += '</table>'
-		
+		console.log(html);
 		document.querySelector("div#result").innerHTML = html;
 	}
 	
@@ -106,6 +107,7 @@ document.querySelector("button#searchAll")
 			}
 		}
 	} // setPaging
+	
 	
 	function movePage(pageNo) {
 		showListAll(pageNo)

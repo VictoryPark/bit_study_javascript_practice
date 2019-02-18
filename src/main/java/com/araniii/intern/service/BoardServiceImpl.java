@@ -56,10 +56,19 @@ public class BoardServiceImpl implements BoardService{
 		result.setEndDate(result.getEndYear()+"-"+
 						  result.getEndMonth()+"-"+
 						  result.getEndDay());
-		System.out.println(result);
-		map.put("searchResult", mapper.selectStaffBySearch(result));
+		//System.out.println(mapper.selectStaffBySearch(result));
+		List<Staff> list = mapper.selectStaffBySearch(result);
+		for(Staff s : list) {
+			if(s.getJuminNo().charAt(7) == '1') {
+				s.setGender("남");
+			} else {
+				s.setGender("여");
+			}
+		}
+		System.out.println("쿼리 후 : "+list);
+		map.put("list", list);
 		map.put("pageResult", new PageResult(result.getPageNo(), mapper.selectCntStaffBySearch(result)));
-		
+		System.out.println("count: "+ mapper.selectCntStaffBySearch(result));
 		return map;
 	}
 	
