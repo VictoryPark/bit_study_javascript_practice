@@ -10,9 +10,6 @@ public class SearchResult {
 	private String name;
 	private List<Integer> gender;
 	private int religion;
-//	private int schoolCode;
-//	private int skillCode;
-	
 	private List<Integer> skill;
 	private List<Integer> school;
 	

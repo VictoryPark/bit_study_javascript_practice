@@ -17,4 +17,5 @@ public interface BoardMapper {
 	public int selectCntAllStaff();
 	public List<Staff> selectStaffBySearch(SearchResult result);
 	public int selectCntStaffBySearch(SearchResult result);
+	public Staff selectStaffByName(String name);
 }

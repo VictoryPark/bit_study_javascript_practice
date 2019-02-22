@@ -112,7 +112,7 @@
 		inner join code_religion r
 		    on s.religion_code = r.religion_code
 		 inner join staff_skill k
-			on k.staff_no = s.staff_no	  --> 	
+			on k.staff_no = s.staff_no
  			<where>
  			<if test="name!=''">
 	 			and s.staff_name like CONCAT('%',#{name},'%')
@@ -157,6 +157,11 @@
  		 order by s.staff_no
  		 limit #{begin}, 5
  		 
+ 	</select>
+ 	
+ 	<select id="selectStaffByName" parameterType="string" resultMap="staffMap">
+ 		select * from staff
+	 	 where staff_name like concat('%', #{name}, '%') 
  	</select>
  	
 	

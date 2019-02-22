@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService{
 		result.setEndDate(result.getEndYear()+"-"+
 						  result.getEndMonth()+"-"+
 						  result.getEndDay());
-		//System.out.println(mapper.selectStaffBySearch(result));
+		System.out.println(result);
 		List<Staff> list = mapper.selectStaffBySearch(result);
 		for(Staff s : list) {
 			if(s.getJuminNo().charAt(7) == '1') {
@@ -71,6 +71,13 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println("count: "+ mapper.selectCntStaffBySearch(result));
 		return map;
 	}
+
+	@Override
+	public Staff searchByName(String name) {
+		Staff s = mapper.selectStaffByName(name);
+		System.out.println("staff: "+s);
+		return mapper.selectStaffByName(name);
+	} //searchByName
 	
 	
 

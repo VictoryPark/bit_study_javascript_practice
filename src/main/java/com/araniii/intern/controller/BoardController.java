@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.araniii.intern.repository.domain.SearchResult;
+import com.araniii.intern.repository.domain.Staff;
 import com.araniii.intern.service.BoardService;
 
 @Controller
@@ -36,11 +37,15 @@ public class BoardController {
 	@PostMapping("/searchbykey.do")
 	@ResponseBody
 	public Map<String, Object> searchByKey(@RequestBody SearchResult result) {
-		System.out.println(result);
+		//System.out.println(result);
 		return service.searchByKey(result);
 	}
 	
-	
+	@PostMapping("/searchbyname.do")
+	@ResponseBody
+	public Staff searchByName(String name) {
+		return service.searchByName(name);
+	}
 	
 	
 

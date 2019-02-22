@@ -15,4 +15,6 @@ public interface BoardService {
 
 	Map<String, Object> searchByKey(SearchResult result);
 
+	Staff searchByName(String name);
+
 }

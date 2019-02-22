@@ -117,6 +117,20 @@
   <!-- 전체검색 페이징, 결과보기... -->
   <c:import url="./searchall.jsp"/>
   <c:import url="./searchbycon.jsp"/>
-
+  <script>
+	document.querySelector("#register")
+			.addEventListener("click",function() {
+		let xhr = new XMLHttpRequest();
+		xhr.addEventListener("load", function() {
+			let staff = JSON.parse(xhr.responseText);
+			console.log(staff)
+		})
+		
+		xhr.open("POST", "<c:url value='/intern/searchbyname.do'/>", true);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+		//console.log(document.querySelector("[name='staffName']").value);
+		xhr.send("name="+form.staffName.value)
+	})
+  </script>
 </body>
 </html>

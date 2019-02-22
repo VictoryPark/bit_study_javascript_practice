@@ -5,8 +5,7 @@
   <script> //조건 검색...
   	let form = document.searchForm;
   	document.querySelector("button#search")
-		.addEventListener("click", function() {
-	
+			.addEventListener("click", function() {
 		showSearchResult(1,selectForm());
 	});
   	
@@ -81,11 +80,12 @@
   	function showSearchResult(pageNo,f) {
   		let xhr = new XMLHttpRequest();
   		xhr.addEventListener('load',function() {
-  			let map = JSON.parse(this.responseText);
+  			let map = JSON.parse(xhr.responseText);
   			makeTable(map);
 			
 			setPagingBySearch(map.pageResult);
   		})
+  		
   		f.pageNo = pageNo;
   		
   		xhr.open("POST", "<c:url value='/intern/searchbykey.do'/>", true)
